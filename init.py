@@ -10,7 +10,6 @@ height = 300
 width = 400
 
 topic = "teste"
-topic_msg = "teste/msg"
 host = "127.0.0.1"
 port = 1883
 client_id = ""
@@ -36,31 +35,19 @@ def show_window(main):
     #name windows
     main.title("Escolher Broker")
 
-def Testando_components(main):
+def components(main):
 
     label_title = Label(main, text="Escolha a opcao de broker")
 
-    lable_broker_msg = Label(main, text="Broker Message: ")
-    # lable_broker_msg.pack()
-    # lable_broker_msg.place(x=100,y=10)
-
     lable_broker_img = Label(main, text="Broker Image: ")
-    # lable_broker_img.pack()
-    # lable_broker_img.place(x=100,y=80)
+    
+    lable_broker_img.pack()
+    lable_broker_img.place(x=100,y=80)
 
-    btn_msg = Button(main,text="connect")
+    
     btn_img = Button(main,text="connect")
 
-    # btn_msg.pack()
-    # btn_img.pack()
-
-    # btn_msg.place(x=200,y=10)
-    # btn_img.place(x=200,y=80)
-
     label_title.grid(row=0, column=0,columnspan=5)
-
-    lable_broker_msg.grid(row=1, column=0,padx=10,pady=20)
-    btn_msg.grid(row=1, column=1)
 
     lable_broker_img.grid(row=2,column=0,padx=10,pady=20)
     btn_img.grid(row=2,column=1)
@@ -102,10 +89,11 @@ def img64():
     # client.disconnect()
 
 
-def broker_msg():
-    client = connect()
+# def broker_msg():
     b_msg = Toplevel()
 
+    client = connect()
+    
     b_msg.title("Broker Message")
     b_msg.geometry("400x300+500+200")
 
@@ -125,7 +113,7 @@ def broker_msg():
 
     # submit_msg(message_entry)
 
-    result = client.publish(topic_msg, message_entry.get(), 2)
+    result = client.publish(topic_msg, "ola", 2)
 
     status = result[0]
 
@@ -136,7 +124,7 @@ def broker_msg():
 
     client.loop_start()
 
-def submit_msg(message):
+# def submit_msg(message):
     print(message.get())
 
 def open_image():
@@ -154,7 +142,6 @@ def open_image():
     global img
 
     img = file_diretory
-
 
 def public():
     msg = img64()
@@ -181,11 +168,10 @@ def broker_img():
     b_img.title("Broker Image")
     b_img.geometry("500x300+450+150")
 
-    Label(b_img, text="Painel de controle de Image").grid(row=0, column=0,sticky=W)
-    Label(b_img, text="Open image: ").grid(row=1,column=0,padx=10,pady=10)
-    Button(b_img, text="Abrir", command=open_image).grid(row=1, column=1, padx=10, pady=20)
-    Button(b_img, text="Enviar",command=public).grid(row=2, column=0, sticky=EW)
-    
+    Label(b_img, text="Painel de controle de Image", font=('calibre',14,'bold')).place(x=130,y=10)
+    Label(b_img, text="Open image: ",font=('calibre',12,'bold')).place(x=100,y=150)
+    btn_open = Button(b_img, text="Abrir", command=open_image,width=10).place(x=250,y=150)
+    bnt_submit = Button(b_img, text="Enviar",command=public,width=10).place(x=350,y=150)
 
 def Init(main):
 
@@ -193,14 +179,11 @@ def Init(main):
     main.columnconfigure(0,weight=0)
     main.rowconfigure(1, weight=0)
 
-    Label(main, text="Escolha o Broker de publicador!").grid(row=0,column=1,sticky=N)
+    lbl_title = Label(main, text="Painel do publicador!", font=('calibre',14,'bold')).place(x=60,y=10)
+
+    lbl_view = Label(main, text="Broker Image: ").place(x=100,y=150)
     
-    Label(main, text="Broker Message: ").grid(row=1, column=1,padx=10,pady=20)
-    Button(main, text="connect",command=broker_msg).grid(row=1,column=2)
-
-    Label(main, text="Broker Image: ").grid(row=2, column=1,padx=10,pady=20)
-    Button(main, text="connect",command=broker_img).grid(row=2,column=2)
-
+    bnt_view = Button(main, text="connect",command=broker_img,width=15).place(x=220, y=145)
 #funcao main
 if __name__ == '__main__':
     main = Tk()

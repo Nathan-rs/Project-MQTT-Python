@@ -1,7 +1,6 @@
 import paho.mqtt.client as mqtt
 import random
 import time
-import json
 import base64
 
 topic = "teste"
