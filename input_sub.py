@@ -13,8 +13,6 @@ port = 1883
 client_id = f'python-mqtt-{random.randint(0, 1000)}'
 contador = f'img/imagem-{random.randint(0, 1000)}'
 
-lista = []
-
 def connect() -> mqtt:
     def on_connect(client, userdata, flags, rc):
         if rc == 0:
@@ -43,7 +41,6 @@ def image_show(img):
     im = Image.open(BytesIO(base64.b64decode(img)))
     name_image = f'img/imagem-{random.randint(0, 1000)}.png'
     im.save(name_image, 'PNG')
-    lista.append(name_image)
 
 def run():
     client = connect()
