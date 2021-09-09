@@ -125,6 +125,7 @@ def Init(main):
     lbl_view = Label(main, text="Publicar postagem: ",font=('calibre',10,'bold')).place(x=65,y=150)
     
     bnt_view = Button(main, text="connect",command=broker_img,width=15).place(x=220, y=145)
+
 #funcao main
 if __name__ == '__main__':
     main = Tk()
