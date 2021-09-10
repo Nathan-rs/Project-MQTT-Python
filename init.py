@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import filedialog as fd
-import input_pub as ip_pub
 import interface_msg as im
 import paho.mqtt.client as mqtt
 import random
